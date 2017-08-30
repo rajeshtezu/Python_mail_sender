@@ -1,7 +1,7 @@
 #! /usr/bin/python
 # Sending mail from Gmail account.
 
-import smtplib, sys
+import smtplib, sys, getpass
 
 smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
 isConnected = smtpObj.ehlo()
@@ -13,11 +13,11 @@ if isConnected[0] == 250:
     # Check if server is ready
     if isServerReady[0] == 220:
         yourMail = input('Enter your gmail username: ')
-        yourPass = input('Enter your gmail password: ')
+        #yourPass = input('Enter your gmail password: ')
 
         # Login to your account
         try:
-            smtpObj.login(yourMail, yourPass)
+            smtpObj.login(yourMail, getpass.getpass(prompt='Password: ', stream=None))
             recipientMail = input('To: ')
             subject = input('Subject: ')
             subject = 'Subject: ' + subject
